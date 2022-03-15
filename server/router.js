@@ -29,6 +29,15 @@ async function routes(request, response) {
   
   if(method === "GET" ) {
     const { stream, type } = await controller.getFileStream(url);
+
+    const contentType = config.constants.CONTENT_TYPE[type];
+
+    if(contentType) {
+      response.writeHead(200, {
+        "Content-type": contentType,
+      });
+    }
+
     return stream.pipe(response);
   }
 
@@ -45,7 +54,7 @@ function handleError(err, response) {
   }
 
   logger.error(`Caught error on API: ${err.stack}`);
-  request.writeHead(500);
+  response.writeHead(500);
   return response.end();
 }
 
