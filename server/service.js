@@ -10,7 +10,7 @@ export class Service {
 
   async getFileInfo(file) {
     const filePath = join(config.dir.publicDir, file);
-    await fsPromises.access(file);
+    await fsPromises.access(filePath);
 
     const fileType = extname(filePath);
 
