@@ -10,7 +10,9 @@
   "scripts": {
     "start": "node server/index.js",
     "dev": "nodemon server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:watch": "LOG_DISABLED=true NODE_OPTIONS=--experimental-vm-modules jest --watchAll",
+    "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --coverage tests/unit"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,7 @@
   },
   "homepage": "https://github.com/rafaelbogfreitas/js_expert_06#readme",
   "devDependencies": {
+    "jest": "^27.5.1",
     "nodemon": "^2.0.15"
   },
   "dependencies": {
