@@ -10,9 +10,10 @@
   "scripts": {
     "start": "node server/index.js",
     "dev": "nodemon server/index.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "test:watch": "LOG_DISABLED=true NODE_OPTIONS=--experimental-vm-modules jest --watchAll",
-    "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --coverage tests/unit"
+    "dev:docker": "docker-compose up dev",
+    "test": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest",
+    "test:watch": "LOG_DISABLED=true NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest --watchAll",
+    "test:coverage": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest --coverage tests/unit"
   },
   "repository": {
     "type": "git",
