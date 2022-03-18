@@ -13,7 +13,11 @@
     "dev:docker": "docker-compose up --build dev",
     "test": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest",
     "test:watch": "LOG_DISABLED=true NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest --watchAll",
-    "test:coverage": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest --coverage tests/unit"
+    "test:coverage": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest --coverage tests/unit",
+    "test:e2e": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest tests/e2e",
+    "test:coverage:docker": "docker-compose up --build test-coverage",
+    "test:docker": "docker-compose up --build test",
+    "test:watch:docker": "docker-compose up --build test-watch"
   },
   "repository": {
     "type": "git",
@@ -28,7 +32,9 @@
   "homepage": "https://github.com/rafaelbogfreitas/js_expert_06#readme",
   "devDependencies": {
     "jest": "^27.5.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "portfinder": "^1.0.28",
+    "supertest": "^6.2.2"
   },
   "dependencies": {
     "pino": "^7.8.0",
