@@ -5,7 +5,7 @@ const currentDir = dirname(fileURLToPath(import.meta.url));
 const root = join(currentDir, '../');
 const audioDir = join(root, "audio");
 const publicDir = join(root, "public");
-const songsDir = join(root, "songs");
+const songsDir = join(audioDir, "songs");
 
 export default {
   port: process.env.PORT || 3000,
@@ -32,6 +32,7 @@ export default {
     AUDIO_MEDIA_TYPE: "mp3",
     SONG_VOLUME: "0.99",
     FALLBACK_BIT_RATE: "128000",
+    BIT_RATE_DIVISOR: 8,
     ENGLISH_CONVERSATION: join(songsDir, 'conversation.mp3'),
   }
 };
