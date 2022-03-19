@@ -11,7 +11,8 @@ export default class View {
       const action = hide ? "add" : "remove";
       btn.classList[action]("unassigned");
 
-      btn.onClick = function onClickReset(){};
+      function onClickReset(){}
+      btn.onclick = onClickReset;
     });
   }
 }

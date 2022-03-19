@@ -1,6 +1,6 @@
 import { expect, describe, it, beforeEach, jest, test } from "@jest/globals";
-import config from "../../../../server/config";
-import Server from "../../../../server/server.js";
+import config from "../../../server/config";
+import Server from "../../../server/server.js";
 import supertest from 'supertest';
 import portfinder from 'portfinder';
 import { Transform } from "stream";
