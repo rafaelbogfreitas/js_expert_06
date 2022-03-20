@@ -92,7 +92,7 @@ export class Service {
       ]);
 
       const [ success, error ] = [stdout, stderr].map(stream => stream.read());
-
+      
       if(error) {
         return await Promise.reject(error);
       }

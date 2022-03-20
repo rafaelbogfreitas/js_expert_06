@@ -13,7 +13,7 @@ export default class View {
   }
 
   changeCommandButtonsVisibility(hide = true) {
-    const cmdButtons = [...document.querySelectorAll("[name='command']")];
+    const cmdButtons = Array.from(document.querySelectorAll("[name='command']"));
 
     cmdButtons.forEach(btn => {
       const action = hide ? "add" : "remove";

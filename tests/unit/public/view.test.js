@@ -27,6 +27,10 @@ describe("View - test suite for view layer", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     jest.restoreAllMocks();
+
+    jest
+      .spyOn(document, document.getElementById.name)
+      .mockReturnValue(makeBtn());
   });
 
   it("should add unassigned class and reset click handler if hide equals true", () => {

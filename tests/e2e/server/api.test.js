@@ -1,7 +1,7 @@
 import { expect, describe, it, beforeEach, jest, test } from "@jest/globals";
 import config from "../../../server/config";
 import Server from "../../../server/server.js";
-import supertest from 'supertest';
+import superTest from 'supertest';
 import portfinder from 'portfinder';
 import { Transform } from "stream";
 import { setTimeout } from "timers/promises";
@@ -72,12 +72,13 @@ describe("API e2e Test Suite", () => {
       const onChunk = jest.fn();
       const { send } = commandSender(server.testServer);
 
+      pipeAndReadStreamData(server.testServer.get('/stream'), onChunk);
+
       await send("start");
       await setTimeout(RETENTION_DATA_PERIOD);
       await send("stop");
 
       const [[buffer]] = onChunk.mock.calls;
-      console.log('calls', buffer);
 
       expect(buffer).toBeInstanceOf(Buffer);
       expect(buffer.length).toBeGreaterThan(1000);
