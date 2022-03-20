@@ -45,6 +45,7 @@ export class Service {
           // We shouldn't send more data if the client disconnected
           if(stream.writableEnded) {
             this.clientStreams.delete(id);
+            continue;
           }
           stream.write(chunk);
         }
@@ -56,7 +57,7 @@ export class Service {
 
   async startStream() {
     logger.info(`Starting stream with: ${this.currentSong}`);
-    const bitRate = (await this.getBitRate(this.currentSong)) / config.constants.BIT_RATE_DIVISOR;
+    const bitRate = this.currentBitRate = (await this.getBitRate(this.currentSong)) / config.constants.BIT_RATE_DIVISOR;
 
     this.throttleTransform = new Throttle(bitRate);
     const songReadable = this.currentReadable = this.createFileStream(this.currentSong);
@@ -147,6 +148,7 @@ export class Service {
 
   appendFxToStream(fx) {
     const throttleTransformable = new Throttle(this.currentBitRate);
+    
     streamPromise.pipeline(
       throttleTransformable,
       this.broadcast()
@@ -171,12 +173,13 @@ export class Service {
   }
 
   mergeAudioStreams(song, readable) {
-    const transformStream = new PassThrough();
     const {
       AUDIO_MEDIA_TYPE,
       SONG_VOLUME,
       FX_VOLUME,
     } = config.constants;
+    
+    const transformStream = new PassThrough();
 
     const args = [
       "-t", AUDIO_MEDIA_TYPE,
