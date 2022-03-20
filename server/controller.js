@@ -24,6 +24,8 @@ export class Controller {
       this.service.stopStream();
       return result;
     }
+
+    return result;
   }
   
   getClientStream() {

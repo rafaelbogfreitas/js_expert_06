@@ -4,6 +4,7 @@ export default class View {
     this.btnStop = document.getElementById("stop");
     this.buttons = () => Array.from(document.querySelectorAll("button"));
     this.ignoreButton = new Set(['unassigned']);
+    this.DISABLE_BTN_TIMEOUT = 200;
 
     async function onBtnClick() {};
     this.onBtnClick = onBtnClick;
@@ -30,6 +31,27 @@ export default class View {
     this.onBtnClick = fn;
   }
 
+  async onCommandClick(btn) {
+    const {
+      srcElement: {
+        classList,
+        innerText,
+      }
+    } = btn;
+
+    this.toggleDisableCommandBtn(classList);
+    await this.onBtnClick(innerText);
+    setTimeout(() => this.toggleDisableCommandBtn(classList), this.DISABLE_BTN_TIMEOUT);
+  }
+
+  toggleDisableCommandBtn(classList) {
+    if(!classList.contains('active')) {
+      classList.add('active');
+      return;
+    }
+
+    classList.remove('active');
+  }
   onStopBtn({ srcElement: { innerText }}) {
     this.toggleBtnStart(false);
     this.changeCommandButtonsVisibility(true);
@@ -58,7 +80,10 @@ export default class View {
 
     if(text.includes("stop")) {
       btn.onclick = this.onStopBtn.bind(this);
+      return;
     }
+
+    btn.onclick = this.onCommandClick.bind(this);
   }
 
   isUnassignedButton(btn) {
