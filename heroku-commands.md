@@ -8,4 +8,6 @@ heroku apps:create js-expert-06
 git remote -v
 
 heroku stack:set container
+heroku open
+heroku logs -t
 ```
