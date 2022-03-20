@@ -10,4 +10,5 @@ git remote -v
 heroku stack:set container
 heroku open
 heroku logs -t
+heroku apps:delete
 ```
